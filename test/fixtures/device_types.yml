@@ -1,0 +1,9 @@
+pc:
+  id: 1
+  name: PC
+
+nb:
+  id: 2
+  name: LapTop
+  parent_id: 1
+  
