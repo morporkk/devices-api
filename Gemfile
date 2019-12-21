@@ -42,9 +42,11 @@ group :development do
 end
 
 group :test do
-  gem 'rails-controller-testing', '1.0.2'
   gem 'minitest'
   gem 'minitest-reporters',       '1.1.14'
+  gem 'shoulda', '~> 3.5'
+  gem 'shoulda-matchers', '~> 2.0'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
