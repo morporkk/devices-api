@@ -1,0 +1,9 @@
+dsk:
+  id: 1
+  name: DellTower
+  device_type_id: 1
+
+nb:
+  id: 2
+  name: Lenovo x789
+  device_type_id: 2

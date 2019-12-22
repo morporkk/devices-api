@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_21_230523) do
+ActiveRecord::Schema.define(version: 2019_12_22_014727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,5 +23,14 @@ ActiveRecord::Schema.define(version: 2019_12_21_230523) do
     t.index ["parent_id"], name: "index_device_types_on_parent_id"
   end
 
+  create_table "devices", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "device_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_type_id"], name: "index_devices_on_device_type_id"
+  end
+
   add_foreign_key "device_types", "device_types", column: "parent_id"
+  add_foreign_key "devices", "device_types"
 end
