@@ -1,0 +1,14 @@
+one:
+  id: 1
+  name: RAM
+  device_type_id: 1
+
+two:
+  id: 2
+  name: CPU
+  device_type_id: 1
+
+three:
+  id: 3
+  name: Battery
+  device_type_id: 2
