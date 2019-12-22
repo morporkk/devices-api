@@ -6,4 +6,8 @@ nb:
   id: 2
   name: LapTop
   parent_id: 1
+
+sk:
+  id: 3
+  name: Speakers
   
