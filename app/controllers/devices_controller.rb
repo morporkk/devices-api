@@ -1,12 +1,16 @@
 class DevicesController < ApplicationController
   def index
-    @devices = Device.all
-    render json: @devices
+    @devices = Device.all.includes(:device_type) # preloads type to avoid N+1 prob
+    render 'devices/index.json.jbuilder'
   end
 
+  # Will show only properties of device that are not null
+  # TODO:
+  #      - refactor/optimize this mess
   def show
     @device = Device.find(params[:id])
-    render json: @device
+    @values = DevicePropertyValue.where('device_id=?', params[:id])
+    render 'devices/show.json.jbuilder'
   end
 
   def create
