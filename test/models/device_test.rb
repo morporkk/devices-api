@@ -6,6 +6,8 @@ class DeviceTest < ActiveSupport::TestCase
   end
 
   should belong_to(:device_type)
+  should have_many(:device_property_values)
+  should have_many(:device_type_properties).through(:device_property_values)
 
   test "should be valid" do
     assert @device.valid?
