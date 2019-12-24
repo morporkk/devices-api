@@ -1,6 +1,7 @@
 class DevicesController < ApplicationController
   def index
-    @devices = Device.all.includes(:device_type) # preloads type to avoid N+1 prob
+    # preloads type for reducing number of querys
+    @devices = paginate Device.all.includes(:device_type)
     render 'devices/index.json.jbuilder'
   end
 

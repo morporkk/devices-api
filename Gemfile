@@ -14,7 +14,8 @@ gem 'puma', '~> 3.11'
 gem 'closure_tree'
 
 gem 'jbuilder'
-
+gem 'will_paginate'
+gem 'api-pagination'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 
