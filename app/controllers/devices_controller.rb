@@ -5,19 +5,19 @@ class DevicesController < ApplicationController
     render 'devices/index.json.jbuilder'
   end
 
-  # Will show only properties of device that are not null
-  # TODO:
-  #      - refactor/optimize this mess
   def show
     @device = Device.find(params[:id])
-    @values = DevicePropertyValue.where('device_id=?', params[:id])
     render 'devices/show.json.jbuilder'
   end
 
+  # Properties that dont pass validation will be ignored
+  # TODO:
+  #  -Unnecessary huge number of queries, try to preload needed models
   def create
     @device = Device.new(device_params)
     if @device.save
-      render json: @device
+      @device.device_property_values.create(property_params)
+      render 'devices/show.json.jbuilder'
     else
       # return 422 status code
       render json: @device.errors.to_a, status: :unprocessable_entity
@@ -47,5 +47,11 @@ class DevicesController < ApplicationController
   # Protection from end-user assignment
   def device_params
     params.require(:device).permit(:name, :device_type_id)
+  end
+
+  # Whitelist array of objects under device_property_values
+  def property_params
+    params.permit(device_property_values: %i[value device_type_property_id])
+          .require(:device_property_values)
   end
 end
