@@ -2,6 +2,12 @@ class DevicesController < ApplicationController
   def index
     # preloads type for reducing number of querys
     @devices = paginate Device.all.includes(:device_type)
+    @devices = @devices.by_name(params[:name]) if params[:name].present?
+    @devices = @devices.by_type(params[:type_id]) if params[:type_id].present?
+    @devices = @devices.date_by_hour(params[:hour].to_i) if params[:hour].present?
+    @devices = @devices.date_by_day(params[:day].to_i) if params[:day].present?
+    @devices = @devices.date_by_month(params[:month].to_i) if params[:month].present?
+    @devices = @devices.by_type_name(params[:type]) if params[:type]
     render 'devices/index.json.jbuilder'
   end
 
