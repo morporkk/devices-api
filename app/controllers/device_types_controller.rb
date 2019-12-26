@@ -1,10 +1,12 @@
 class DeviceTypesController < ApplicationController
   def index
-    render json: DeviceType.all
+    @types = DeviceType.all
+    render 'device_types/index.json.jbuilder'
   end
 
   def show
-    render json: DeviceType.find(params[:id])
+    @type = DeviceType.find(params[:id])
+    render 'device_types/show.json.jbuilder'
   end
 
   def create
