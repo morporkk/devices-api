@@ -10,12 +10,12 @@ class DeviceTypesController < ApplicationController
   end
 
   def create
-    device_type = DeviceType.new(device_type_params)
-    if device_type.save
-      render json: device_type
+    @type = DeviceType.new(device_type_params)
+    if @type.save
+      render 'device_types/show.json.jbuilder'
     else
       # return 422 status code
-      render json: device_type.errors.to_a, status: :unprocessable_entity
+      render json: @type.errors.to_a, status: :unprocessable_entity
     end
   end
 
@@ -41,6 +41,7 @@ class DeviceTypesController < ApplicationController
 
   # Protection from end-user assignment
   def device_type_params
-    params.require(:device_type).permit(:name, :parent_id)
+    params.require(:device_type).permit(:name, :parent_id,
+                                        device_type_properties_attributes: [:name])
   end
 end
