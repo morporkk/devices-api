@@ -9,10 +9,10 @@ class Device < ApplicationRecord
 
   # search filters
   scope :by_type, ->(type) { joins(:device_type).where(device_types: {name: type}) }
-  scope :by_name, ->(name) { where("lower(name) LIKE ?", "%#{name.downcase}%")}
+  scope :by_name, ->(name) { where("lower(devices.name) LIKE ?", "%#{name.downcase}%")}
   scope :by_type_id, ->(type_id) { where("device_type_id = ?", type_id)}
   # return only records updated X months/days/hours ago
-  scope :by_month, ->(months) { where("updated_at > ?", months.month.ago) }
-  scope :by_day, ->(days) { where("updated_at > ?", days.day.ago) }
-  scope :by_hour, ->(hours) { where("updated_at > ?", hours.hour.ago) }
+  scope :by_month, ->(months) { where("devices.updated_at > ?", months.to_i.month.ago) }
+  scope :by_day, ->(days) { where("devices.updated_at > ?", days.to_i.day.ago) }
+  scope :by_hour, ->(hours) { where("devices.updated_at > ?", hours.to_i.hour.ago) }
 end
