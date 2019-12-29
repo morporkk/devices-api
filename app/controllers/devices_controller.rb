@@ -19,9 +19,9 @@ class DevicesController < ApplicationController
   # TODO:
   #  -Unnecessary huge number of queries, try to preload needed models
   def create
+    # byebug
     @device = Device.new(device_params)
     if @device.save
-      @device.device_property_values.create(property_params)
       render 'devices/show.json.jbuilder'
     else
       # return 422 status code
@@ -51,13 +51,8 @@ class DevicesController < ApplicationController
 
   # Protection from end-user assignment
   def device_params
-    params.require(:device).permit(:name, :device_type_id)
-  end
-
-  # Whitelist array of objects under device_property_values
-  def property_params
-    params.permit(device_property_values: %i[value device_type_property_id])
-          .require(:device_property_values)
+    params.require(:device).permit(:name, :device_type_id,
+      device_property_values_attributes: [:value, :device_type_property_id])
   end
 
   def filtering_params(params)
