@@ -4,7 +4,7 @@ class DeviceType < ApplicationRecord
   # belongs_to :parent, class_name: :DeviceType, optional: true
   # has_many :children, class_name: :DeviceType, foreign_key: :parent_id
   has_many :devices, dependent: :restrict_with_exception
-  has_many :device_type_properties
+  has_many :device_type_properties, dependent: :destroy
   accepts_nested_attributes_for :device_type_properties
 
   validates :name, presence: true, length: { maximum: 65 },
