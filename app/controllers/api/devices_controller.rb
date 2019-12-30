@@ -25,7 +25,7 @@ module Api
       # byebug
       @device = Device.new(device_params)
       if @device.save
-        render 'devices/show.json.jbuilder'
+        render 'devices/create.json.jbuilder'
       else
         # return 422 status code
         render json: @device.errors.to_a, status: :unprocessable_entity
@@ -35,7 +35,7 @@ module Api
     def update
       @device = Device.find(params[:id])
       if @device.update_attributes(device_params)
-        render json: @device
+        render 'devices/update.json.jbuilder'
       else
         # return 422 status code
         render json: @device.errors.to_a, status: :unprocessable_entity
@@ -47,7 +47,7 @@ module Api
       @device.destroy
       # destroy returns object that was deleted from db
       # reconsider this
-      render json: @device
+      render json: { status: "Deleted", id: @device.id, name: @device.name }
     end
 
     private
