@@ -13,7 +13,7 @@ module Api
     def create
       @type = DeviceType.new(device_type_params)
       if @type.save
-        render 'device_types/show.json.jbuilder'
+        render 'device_types/create.json.jbuilder'
       else
         # return 422 status code
         render json: @type.errors.to_a, status: :unprocessable_entity
@@ -21,21 +21,19 @@ module Api
     end
 
     def update
-      device_type = DeviceType.find(params[:id])
-      if device_type.update_attributes(device_type_params)
-        render json: device_type
+      @type = DeviceType.find(params[:id])
+      if @type.update_attributes(device_type_params)
+        render 'device_types/update.json.jbuilder'
       else
         # return 422 status code
-        render json: device_type.errors.to_a, status: :unprocessable_entity
+        render json: @type.errors.to_a, status: :unprocessable_entity
       end
     end
 
     def destroy
-      device_type = DeviceType.find(params[:id])
-      device_type.destroy
-      # destroy returns object that was deleted from db
-      # reconsider this
-      render json: device_type
+      @type = DeviceType.find(params[:id])
+      @type.destroy
+      render json: { status: "Deleted", id: @type.id, name: @type.name }
     end
 
     private
