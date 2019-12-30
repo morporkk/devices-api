@@ -7,7 +7,7 @@ class Device < ApplicationRecord
   validates :name, presence: true, length: { maximum: 65 },
                    uniqueness: true
 
-  # search filters
+  # search filter lambdas
   scope :by_type, ->(type) { joins(:device_type).where(device_types: {name: type}) }
   scope :by_name, ->(name) { where("lower(devices.name) LIKE ?", "%#{name.downcase}%")}
   scope :by_type_id, ->(type_id) { where("device_type_id = ?", type_id)}

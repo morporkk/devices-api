@@ -4,6 +4,8 @@ module Api
       # preloads type for reducing number of querys
       @devices = paginate Device.all.includes(:device_type)
 
+      # dynamiclly send scope methods to device object according to recieved
+      # query params hash
       filtering_params(params).each do |key, value|
         @devices = @devices.public_send("by_#{key}", value) if value.present?
       end
@@ -18,7 +20,7 @@ module Api
 
     # Properties that dont pass validation will be ignored
     # TODO:
-    #  -Unnecessary huge number of queries, try to preload needed models
+    #  - Try to optimize query calls
     def create
       # byebug
       @device = Device.new(device_params)
@@ -51,9 +53,12 @@ module Api
     private
 
     # Protection from end-user assignment
+    # allows nested attributes
     def device_params
-      params.require(:device).permit(:name, :device_type_id,
-        device_property_values_attributes: [:value, :device_type_property_id])
+      params.require(:device)
+            .permit(:name, :device_type_id,
+                    device_property_values_attributes:
+                    %i[value device_type_property_id])
     end
 
     def filtering_params(params)
