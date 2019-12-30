@@ -32,7 +32,7 @@ module Api
 
     def update
       @device = Device.find(params[:id])
-      if @device.update_attributes(@device_params)
+      if @device.update_attributes(device_params)
         render json: @device
       else
         # return 422 status code
