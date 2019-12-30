@@ -11,3 +11,11 @@ sk:
   id: 3
   name: Speakers
   
+parent:
+  id: 4
+  name: Telefon
+
+child:
+  id: 5
+  name: Smartphone
+  parent_id: 4
