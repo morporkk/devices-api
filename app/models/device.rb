@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: devices
+#
+#  id             :bigint           not null, primary key
+#  name           :string           not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  device_type_id :bigint
+#
+# Indexes
+#
+#  index_devices_on_device_type_id  (device_type_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (device_type_id => device_types.id)
+#
+
 class Device < ApplicationRecord
   belongs_to :device_type
   has_many   :device_property_values, dependent: :destroy

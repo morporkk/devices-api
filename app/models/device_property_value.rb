@@ -1,3 +1,26 @@
+# == Schema Information
+#
+# Table name: device_property_values
+#
+#  id                      :bigint           not null, primary key
+#  value                   :string           not null
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  device_id               :bigint
+#  device_type_property_id :bigint
+#
+# Indexes
+#
+#  device_property_value_indexes                            (device_id,device_type_property_id) UNIQUE
+#  index_device_property_values_on_device_id                (device_id)
+#  index_device_property_values_on_device_type_property_id  (device_type_property_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (device_id => devices.id)
+#  fk_rails_...  (device_type_property_id => device_type_properties.id)
+#
+
 class DevicePropertyValue < ApplicationRecord
   belongs_to :device
   belongs_to :device_type_property
