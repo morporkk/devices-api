@@ -1,0 +1,7 @@
+<device-types>
+  <% @types.each do |type| %>
+    <type id="<%= type.id %>">
+      <name><%= type.name %></name>
+    </type>
+  <% end %>
+</device-types>

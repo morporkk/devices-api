@@ -2,12 +2,18 @@ module Api
   class DeviceTypesController < ApplicationController
     def index
       @types = DeviceType.all
-      render 'device_types/index.json.jbuilder'
+      respond_to do |format|
+        format.json { render 'device_types/index.json.jbuilder' }
+        format.xml  { render 'device_types/index.xml.erb' }
+      end
     end
 
     def show
       @type = DeviceType.find(params[:id])
-      render 'device_types/show.json.jbuilder'
+      respond_to do |format|
+        format.json { render 'device_types/show.json.jbuilder' }
+        format.xml  { render 'device_types/show.xml.erb' }
+      end
     end
 
     def create
