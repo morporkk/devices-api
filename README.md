@@ -11,55 +11,57 @@
 https://morporkk.github.io/slate/?shell#introduction
 
 Integracija sa swaggerom za rails aplikacije uglavnom ide preko RSpec test biblioteke,
-minitest opcija je znatno slabije dokumentovana pa sam posle par neuspjelih pokusaja odlucio da pjeske napravim Docs uz slate template :'D.
+minitest opcija je znatno slabije dokumentovana pa sam posle par neuspjelih pokusaja odlucio da pjeske napravim Docs uz slate template :').
 
 ## Local Install
+
+Ja trenutno koristim Xubuntu ali aplikacija moze da se pokrene lokalno i na windowsu kroz [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10?redirectedfrom=MSDN)(ubuntu)
+
 #### paketi:
 
 ```
-$sudo apt install curl git nodejs gcc make libssl-dev libreadline-dev zlib1g-dev
+sudo apt install curl git nodejs gcc make libssl-dev libreadline-dev zlib1g-dev
 ````
 
 #### rbenv:
 
 ```shell
-$git clone https://github.com/rbenv/rbenv.git ~/.rbenv`
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 
 
-$echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-$echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-$exit
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+exit
 
-$mkdir -p "$(rbenv root)"/plugins
-$git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+mkdir -p "$(rbenv root)"/plugins
+git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
 ```
 #### ruby/rails:
 ```
-$rbenv install 2.6.4 --verbose
-$rbenv global 2.6.4
-$gem install rails -v 5.2.4
+rbenv install 2.6.4 --verbose
+rbenv global 2.6.4
+gem install rails -v 5.2.4
 ```
 
-Za windows isto ovo sve samo kroz [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10?redirectedfrom=MSDN) :D
 
 Da pokrenete aplikaciju lokalno klonirajte repo, cd u njega i pokrenite bundler:
 ```
-$bundle install 
+bundle install 
 ```
 u `config/database.yml` file-u unesite user/password vaseg pg user acc. i pokrenite psql server. Nakon toga:
 ```
-$rails db:create
-$rails db:migrate
+rails db:create
+rails db:migrate
 ```
 
-I na kraju pokrenite server `$rails s`
+I na kraju pokrenite server `rails s`
 
 ### SQLite opcija
 
-Ako vam se ne namjesta postgreSQL server, a i moze doci do komplikacija preko WSL-a, za lokalno testiranje mozete prebaci na SQLite3
+Ako vam se ne namjesta postgreSQL server, a i moze doci do komplikacija preko WSL-a, za lokalno testiranje mozetete prebaciti na SQLite3
 
 ```
-$sudo apt install libsqlite3-dev
+sudo apt install libsqlite3-dev
 ```
 Izbrisite liniju 9 u `Gemfile`-u, i zamjenite obrisanu liniju sa
 ```
@@ -70,7 +72,7 @@ end
 
 I pokrenite bundler:
 ```
-$bundle install
+bundle install
 ```
 
 Izbrisite sadrzaj `config/database.yml` file-a i kopirajte ovo
@@ -95,9 +97,9 @@ production:
 
 ```
 
-Pokrenite migracije sa `$rails db:migrate` i kreiracete SQLite bazu u `db/development.sqlite3`
+Pokrenite migracije sa `rails db:migrate` i kreiracete SQLite bazu u `db/development.sqlite3`
 
-Na kraju pokrenite i server `$rails s` 
+Na kraju pokrenite i server `rails s` 
 
 ### Notes
 
