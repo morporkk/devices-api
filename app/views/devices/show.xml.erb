@@ -1,0 +1,16 @@
+
+<device id="<%= @device.id %>">
+  <name><%= @device.name %></name>
+  <device-type>
+    <id><%= @device.device_type.id %></id>
+    <name><%= @device.device_type.name %></name>
+  </device-type>
+  <properties>
+    <% @device.device_type_properties.each do |p| %>
+      <property>
+        <name><%= p.name %></name>
+        <value><%= @device.device_property_values.where(device_type_property_id: p.id).take.value %></value>
+      </property>
+    <% end %>
+  </properties>
+</device>

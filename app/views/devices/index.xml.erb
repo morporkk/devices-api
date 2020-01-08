@@ -1,0 +1,10 @@
+<Devices>
+  <% @devices.each do |d| %>
+    <device id="<%= d.id %>">
+      <name>
+        <%= d.name %>
+      </name>
+      <type><%= d.device_type.name %></type>
+    </device>
+  <% end %>
+</Devices>

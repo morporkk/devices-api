@@ -10,12 +10,18 @@ module Api
         @devices = @devices.public_send("by_#{key}", value) if value.present?
       end
 
-      render 'devices/index.json.jbuilder'
+      respond_to do |format|
+        format.json { render 'devices/index.json.jbuilder' }
+        format.xml { render  'devices/index.xml.erb' }
+      end
     end
 
     def show
       @device = Device.find(params[:id])
-      render 'devices/show.json.jbuilder'
+      respond_to do |format|
+        format.json { render 'devices/show.json.jbuilder' }
+        format.xml  { render 'devices/show.xml.erb' }
+      end
     end
 
     # Properties that dont pass validation will be ignored
