@@ -58,7 +58,7 @@ I na kraju pokrenite server `rails s`
 
 ### SQLite opcija
 
-Ako vam se ne namjesta postgreSQL server, a i moze doci do komplikacija preko WSL-a, za lokalno testiranje mozetete prebaciti na SQLite3
+Ako vam se ne podesava postgreSQL server, a i moze doci do komplikacija preko WSL-a, za lokalno testiranje mozetete prebaciti na SQLite3
 
 ```
 sudo apt install libsqlite3-dev
@@ -106,7 +106,7 @@ Na kraju pokrenite i server `rails s`
 - API je hostovan na https://bild-devicesapi-test.herokuapp.com/api.
 Kako sam koristio free heroku tier, posle nekih pola sata neaktivnosti aplikacija ide na sleep mode, pa
 prvi request moze da potraje dok se ponovo pokrene (:
-- Trenutno radi samo sa JSON formatom. Na XML branch-i je opciju da odgovori i na JSON i na XML request ali jos nisam rijesio problem sa parserom pa akcije za kreiranje/izmjenu podataka ne rade. Rails je prekinuo nativ podrsku za xml pa sam zaglavio tu. 
+- Trenutno radi samo sa JSON formatom. Na XML branch-i je opcija da odgovori i na JSON i na XML request ali jos nisam rijesio problem sa parserom pa akcije za kreiranje/izmjenu podataka ne rade. Rails nije bas naklonjen XMLu 
 
 ### TODO
 
@@ -119,4 +119,4 @@ prvi request moze da potraje dok se ponovo pokrene (:
 - maybe add aliases for models for clearer code
 - add index to frequently searched columns
 - improve database seed
-- add custom error responses
+- add custom error responses/catch exceptions
